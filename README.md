@@ -1,5 +1,5 @@
 # svelte-webpack-boilerplate
-Svelte application boilerplate with Webpack, less, PostCss
+Svelte application boilerplate with Webpack, less, PostCss, svelte-spa-router
 
 ### Get Started
 To create a new project based on this boilerplate, you may following next way:
@@ -20,4 +20,8 @@ npm run start
 ```
 npm run build
 ```
+
+### About Router
+come to this [repository]('https://github.com/ItalyPaleAle/svelte-spa-router') to see Howt to use it;
+
 

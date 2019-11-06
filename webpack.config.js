@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin =  require('mini-css-extract-plugin');
-const { less, pug } = require('svelte-preprocess');
+// const { less, pug } = require('svelte-preprocess');
 const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
