@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import { push, pop, replace, location, querystring } from 'svelte-spa-router';
-  import { onMount } from 'svelte';
+  import { push, pop, replace, location, querystring } from "svelte-spa-router";
+  import { onMount } from "svelte";
   export let params = {};
   function handleClick() {
     push('/404');

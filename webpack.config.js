@@ -1,33 +1,44 @@
-const MiniCssExtractPlugin =  require('mini-css-extract-plugin');
-// const { less, pug } = require('svelte-preprocess');
-const path = require('path');
+const MiniCssExtractPlugin =  require("mini-css-extract-plugin");
+const path = require("path");
 
-const mode = process.env.NODE_ENV || 'development';
-const prod = mode === 'production';
+const mode = process.env.NODE_ENV || "development";
+const prod = mode === "production";
 
 module.exports = {
+  devtool: prod ? false : "source-map",
+  mode,
   entry: {
-    bundle: ['./src/index.js']
+    bundle: ["./src/index.js"]
   },
   resolve: {
     alias: {
-      svelte: path.resolve('node_modules', 'svelte')
+      svelte: path.resolve("node_modules", "svelte")
     },
-    extensions: ['.mjs', '.js', '.svelte'],
-    mainFields: ['svelte', 'browser', 'module', 'main']
+    extensions: [".mjs", ".js", ".svelte"],
+    mainFields: ["svelte", "browser", "module", "main"]
   },
   output: {
-    path: __dirname + '/public',
-    filename: '[name].js',
-    chunkFilename: '[name].[id].js'
+    path: __dirname + "/public",
+    filename: "[name].js",
+    chunkFilename: "[name].[hash:8].js"
   },
-  mode,
+  optimization: {
+    splitChunks: {
+      chunks: "async",
+      minSize:  30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: "~",
+      name: true
+    }
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: "[name].css"
     })
   ],
-  devtool: prod ? false : 'source-map',
   module: {
     rules: [
       {
@@ -37,16 +48,16 @@ module.exports = {
           options: {
             emitCss: true,
             hotReload: true,
-            preprocess: require('svelte-preprocess')()
+            preprocess: require("svelte-preprocess")()
           }
         }
       },
       {
         test: /\.(css|less)$/,
         use: [
-          prod ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'postcss-loader'
+          prod ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          "postcss-loader"
         ]
       }
     ]
