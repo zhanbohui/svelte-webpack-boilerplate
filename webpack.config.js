@@ -42,6 +42,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            cacheDirectory: true,
+            plugins: ['@babel/plugin-transform-runtime']
+          }
+        }
+      },
+      {
         test: /\.svelte$/,
         use: {
           loader: "svelte-loader",
@@ -58,6 +70,14 @@ module.exports = {
           prod ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
           "postcss-loader"
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|mp4|svg|ttf)$/,
+        use: [
+          {
+            loader: "file-loader"
+          }
         ]
       }
     ]
